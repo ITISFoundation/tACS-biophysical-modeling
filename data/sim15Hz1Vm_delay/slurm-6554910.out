@@ -1,0 +1,162 @@
+NEURON -- VERSION 9.0a-1499-g31530e238 HEAD (31530e238) 2025-09-29
+Duke, Yale, and the BlueBrain Project -- Copyright 1984-2022
+See http://neuron.yale.edu/neuron/credits
+
+Additional mechanisms from files
+ "mod/ALU.mod" "mod/Ca.mod" "mod/CaDynamics_DC0.mod" "mod/CaDynamics_E2.mod" "mod/Ca_HVA.mod" "mod/Ca_HVA2.mod" "mod/Ca_LVAst.mod" "mod/ConductanceSource.mod" "mod/CoreNEURONArtificialCell.mod" "mod/DetAMPANMDA.mod" "mod/DetGABAAB.mod" "mod/GluSynapse.mod" "mod/Ih.mod" "mod/Im.mod" "mod/K_Pst.mod" "mod/K_Tst.mod" "mod/KdShu2007.mod" "mod/Kv7.mod" "mod/MembraneCurrentSource.mod" "mod/NaTa_t.mod" "mod/NaTg.mod" "mod/NaTg_axon.mod" "mod/NaTg_persistent_axon.mod" "mod/NaTg_persistent_somadend.mod" "mod/NaTg_somadend.mod" "mod/NaTs2_t.mod" "mod/Nap_Et2.mod" "mod/ProbAMPANMDA_EMS.mod" "mod/ProbGABAAB_EMS.mod" "mod/SK_E2.mod" "mod/SKv3_1.mod" "mod/SonataReportHelper.mod" "mod/SonataReports.mod" "mod/StochKv.mod" "mod/StochKv3.mod" "mod/TTXDynamicsSwitch.mod" "mod/gap.mod" "mod/netstim_inhpoisson.mod" "mod/vecevent.mod"
+numprocs=2048
+[STEP] Initializing Neurodamus (0.1.dev1) Logfile: pydamus_2026-03-02_11h43.log
+[INFO]  => Neurodamus Mod & Hoc lib loaded.
+[INFO] Checking for plugins...
+[INFO]  => Engines Available: ['Base', 'NGV', 'METype']
+[INFO]   : Connections Types: [<ConnectionTypes.NeuroGlial: 'NeuroGlial'>, <ConnectionTypes.GlioVascular: 'GlioVascular'>, None, <ConnectionTypes.Synaptic: 'Synaptic'>, <ConnectionTypes.GapJunction: 'GapJunction'>, <ConnectionTypes.NeuroModulation: 'NeuroModulation'>]
+[STEP] Setting up Neurodamus configuration
+[INFO] Initializing Simulation Configuration and Validation
+[INFO] Initializing hoc config objects
+[INFO] User-defined RNG base seed 843
+[WARNING] Some node set rules were replaced from /capstor/scratch/cscs/jtharayi/O1_data/node_sets.json
+[INFO] Memusage (RSS) per task [MB]: Max=113.74, Min=110.98, Mean(Stdev)=111.60(0.26)
+[INFO] Checking Connection Configurations
+[INFO]  => CHECK No Global vars!
+[INFO]  => CHECK No Block Overrides!
+[INFO]  => CHECK No single Weight=0 blocks!
+[STEP] ================ CALCULATING LOAD BALANCE ================
+[STEP] Computing Load Balance
+[INFO] Activating experimental LB for Sonata circuit 'S1nonbarrel_neurons'
+[WARNING] Load Balance AUTO-SELECTED: WholeCell. Reason: Simulation size
+[INFO]  => Found valid complexity file: sim_conf/_loadbal_3f59de9c8a.S1nonbarrel_neurons/cx_S1nonbarrel_neurons_hex0#.dat
+[INFO] Assigning Cells <-> 2048 CPUs [mymetis3]
+total complexity is 2.69331e+08
+30190 cells
+30190 pieces
+maximum complexity is 132792 for host 1890
+load imbalance is 1.0%
+maximum of 15 pieces on host 57
+no broken cells
+[INFO] Load Balancing done.
+[INFO] Memusage (RSS) per task [MB]: Max=135.93, Min=114.23, Mean(Stdev)=114.75(0.53)
+[STEP] ==================== BUILDING CIRCUIT ====================
+[WARNING] SonataError for nodeset Layer1Inhibitory from population "POm" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer1Inhibitory from population "VPM" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer23Excitatory from population "POm" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer23Excitatory from population "VPM" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer23Inhibitory from population "POm" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer23Inhibitory from population "VPM" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer4Excitatory from population "POm" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer4Excitatory from population "VPM" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer4Inhibitory from population "POm" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer4Inhibitory from population "VPM" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer5Excitatory from population "POm" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer5Excitatory from population "VPM" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer5Inhibitory from population "POm" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer5Inhibitory from population "VPM" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer6Excitatory from population "POm" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer6Excitatory from population "VPM" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer6Inhibitory from population "POm" : No such attribute: 'mtype', skip
+[WARNING] SonataError for nodeset Layer6Inhibitory from population "VPM" : No such attribute: 'mtype', skip
+[STEP] LOADING NODES
+[STEP] Circuit POm
+[STEP] Circuit S1nonbarrel_neurons
+[INFO] Reading Nodes (METype) info from '/capstor/scratch/cscs/jtharayi/O1_data/S1nonbarrel_neurons/nodes.h5'
+[INFO]  => Cell distribution from Load Balance is valid
+[INFO]  -> Distributing target 'hex0' using Load-Balance
+/capstor/scratch/cscs/jtharayi/builds/obi-stim/store/linux-sles15-zen2/gcc-13.3.0/py-numpy-1.26.1-xq3a5e25bwc6wch4eldnw5c6n7ldyy5o/lib/python3.11/site-packages/numpy/core/getlimits.py:549: UserWarning: The value of the smallest subnormal for <class 'numpy.float64'> type is zero.
+  setattr(self, word, getattr(machar, word).flat[0])
+/capstor/scratch/cscs/jtharayi/builds/obi-stim/store/linux-sles15-zen2/gcc-13.3.0/py-numpy-1.26.1-xq3a5e25bwc6wch4eldnw5c6n7ldyy5o/lib/python3.11/site-packages/numpy/core/getlimits.py:549: UserWarning: The value of the smallest subnormal for <class 'numpy.float32'> type is zero.
+  setattr(self, word, getattr(machar, word).flat[0])
+[INFO]  => Loaded info about 14 target cells (out of 211712)
+[STEP] Circuit VPM
+[STEP] Circuit external_S1nonbarrel_neurons__S1nonbarrel_neurons__chemical
+[STEP] FINALIZING CIRCUIT CELLS
+[STEP] Circuit S1nonbarrel_neurons
+[INFO] Finalizing cells... Gid offset: 10000
+[INFO]  > Instantiating cells... (14 in Rank 0)
+|-------20%-------40%-------60%-------80%------100%| [Time taken: 8.36 s]
+[INFO]  > Updating targets
+[INFO]  > Initializing cell network
+[INFO] Memusage (RSS) per task [MB]: Max=188.93, Min=158.42, Mean(Stdev)=165.96(3.86)
+[STEP] LOADING CIRCUIT CONNECTIVITY
+[STEP] Circuit POm
+[INFO]  => No connectivity set as internal. See projections
+[STEP] Circuit S1nonbarrel_neurons
+[INFO] Processing edge file /capstor/scratch/cscs/jtharayi/O1_data/S1nonbarrel_neurons__S1nonbarrel_neurons__chemical/edges.h5, pop: S1nonbarrel_neurons__S1nonbarrel_neurons__chemical
+[INFO] Init SynapseRuleManager. Options: {'load_offsets': False, 'dry_run_stats': None}
+[INFO] Loading connections to population: <ConnectionSet: 2969-2969 (S1nonbarrel_neurons->S1nonbarrel_neurons)>
+[INFO] Creating group connections (1 groups match)
+[INFO]  * Pathway hex_O1#S1nonbarrel_neurons -> hex_O1#S1nonbarrel_neurons. Created 15429578 connections
+[STEP] Circuit VPM
+[INFO]  => No connectivity set as internal. See projections
+[STEP] Circuit external_S1nonbarrel_neurons__S1nonbarrel_neurons__chemical
+[INFO]  => No connectivity set as internal. See projections
+[STEP] Handling projections...
+[INFO] Processing Edge file: /capstor/scratch/cscs/jtharayi/O1_data/VPM__S1nonbarrel_neurons__chemical/edges.h5
+[INFO]  * VPM__S1nonbarrel_neurons__chemical__VPM-S1nonbarrel_neurons (Type: ConnectionTypes.Synaptic, Src: VPM, Dst: S1nonbarrel_neurons)
+[INFO] Loading connections to population: <ConnectionSet: 2134-2969 (VPM->S1nonbarrel_neurons)>
+[INFO] No matching Connection blocks. Loading all synapses...
+Loading|-------20%-------40%-------60%-------80%------100%| [Time taken: 12.18 s]
+[INFO]  * [ALL]. Created 1341551 connections
+[INFO] Processing Edge file: /capstor/scratch/cscs/jtharayi/O1_data/POm__S1nonbarrel_neurons__chemical/edges.h5
+[INFO]  * POm__S1nonbarrel_neurons__chemical__POm-S1nonbarrel_neurons (Type: ConnectionTypes.Synaptic, Src: POm, Dst: S1nonbarrel_neurons)
+[INFO] Loading connections to population: <ConnectionSet: 1166-2969 (POm->S1nonbarrel_neurons)>
+[INFO] No matching Connection blocks. Loading all synapses...
+Loading|-------20%-------40%-------60%-------80%------100%| [Time taken: 5.71 s]
+[INFO]  * [ALL]. Created 1041445 connections
+[INFO] Processing Edge file: /capstor/scratch/cscs/jtharayi/O1_data/external_S1nonbarrel_neurons__S1nonbarrel_neurons__chemical.h5
+[INFO]  * external_S1nonbarrel_neurons__S1nonbarrel_neurons__chemical__S1nonbarrel_neurons-S1nonbarrel_neurons (Type: ConnectionTypes.Synaptic, Src: S1nonbarrel_neurons, Dst: S1nonbarrel_neurons)
+[INFO] Loading connections to population: <ConnectionSet: 2969-2969 (S1nonbarrel_neurons->S1nonbarrel_neurons)>
+[INFO] Creating group connections (1 groups match)
+[INFO]  * Pathway hex_O1#S1nonbarrel_neurons -> hex_O1#S1nonbarrel_neurons. Created 823580 connections
+[STEP] Configuring connections...
+[INFO]  * Pathway hex_O1 -> hex_O1
+[INFO]  => Configured 16253158.0 connections
+[INFO] Done, but waiting for all ranks
+[INFO] Memusage (RSS) per task [MB]: Max=228.99, Min=210.93, Mean(Stdev)=220.64(2.65)
+[STEP] ================ INSTANTIATING SIMULATION ================
+[STEP] Handling Replay
+[INFO] Memusage (RSS) per task [MB]: Max=228.99, Min=210.93, Mean(Stdev)=220.64(2.65)
+[STEP] Creating connections in the simulator
+[INFO] Instantiating synapses... Params: {'replay_mode': <ReplayMode.AS_REQUIRED: 1>}
+[INFO]  * Connections among S1nonbarrel_neurons -> S1nonbarrel_neurons, attach src: True
+Pop:(2969, 2969)|-------20%-------40%-------60%-------80%------100%| [Time taken: 9.06 s]
+[INFO]  => Created 72132564 synapses
+[INFO] Instantiating synapses... Params: {'replay_mode': <ReplayMode.AS_REQUIRED: 1>}
+[INFO]  * Connections among VPM -> S1nonbarrel_neurons, attach src: False
+Pop:(2134, 2969)|-------20%-------40%-------60%-------80%------100%| [Time taken: 0.46 s]
+[INFO]  => Created 4228983 synapses
+[INFO] Instantiating synapses... Params: {'replay_mode': <ReplayMode.AS_REQUIRED: 1>}
+[INFO]  * Connections among POm -> S1nonbarrel_neurons, attach src: False
+Pop:(1166, 2969)|-------20%-------40%-------60%-------80%------100%| [Time taken: 0.24 s]
+[INFO]  => Created 2600783 synapses
+[INFO] Memusage (RSS) per task [MB]: Max=383.60, Min=293.72, Mean(Stdev)=337.81(15.28)
+[STEP] Stimulus Apply.
+[INFO]  * [STIM] Stimulus_gExc_L1 (RelativeOrnsteinUhlenbeck): -> Layer1Inhibitory
+[INFO]  * [STIM] Stimulus_gExc_L23E (RelativeOrnsteinUhlenbeck): -> Layer23Excitatory
+[INFO]  * [STIM] Stimulus_gExc_L23I (RelativeOrnsteinUhlenbeck): -> Layer23Inhibitory
+[INFO]  * [STIM] Stimulus_gExc_L4E (RelativeOrnsteinUhlenbeck): -> Layer4Excitatory
+[INFO]  * [STIM] Stimulus_gExc_L4I (RelativeOrnsteinUhlenbeck): -> Layer4Inhibitory
+[INFO]  * [STIM] Stimulus_gExc_L5E (RelativeOrnsteinUhlenbeck): -> Layer5Excitatory
+[INFO]  * [STIM] Stimulus_gExc_L5I (RelativeOrnsteinUhlenbeck): -> Layer5Inhibitory
+[INFO]  * [STIM] Stimulus_gExc_L6E (RelativeOrnsteinUhlenbeck): -> Layer6Excitatory
+[INFO]  * [STIM] Stimulus_gExc_L6I (RelativeOrnsteinUhlenbeck): -> Layer6Inhibitory
+[INFO]  * [STIM] ex_efields (SpatiallyUniformEField): -> hex0
+[INFO] Inject extracellular stimuli
+slurmstepd: error: Detected 1 oom_kill event in StepId=6554910.0. Some of the step tasks have been OOM Killed.
+srun: error: nid001347: task 297: Out Of Memory
+srun: Terminating StepId=6554910.0
+slurmstepd: error: *** STEP 6554910.0 ON nid001345 CANCELLED AT 2026-03-02T11:47:18 ***
+srun: error: nid001348: tasks 384-511: Terminated
+srun: error: nid001349: tasks 512-639: Terminated
+srun: error: nid001346: tasks 128-255: Terminated
+srun: error: nid001345: tasks 0-127: Terminated
+srun: error: nid002152: tasks 1280-1407: Terminated
+srun: error: nid002161: tasks 1536-1663: Terminated
+srun: error: nid002176: tasks 1792-1919: Terminated
+srun: error: nid001672: tasks 640-767: Terminated
+srun: error: nid001674: tasks 896-1023: Terminated
+srun: error: nid002160: tasks 1408-1535: Terminated
+srun: error: nid001673: tasks 768-895: Terminated
+srun: error: nid002162: tasks 1664-1791: Terminated
+srun: error: nid001832: tasks 1152-1279: Terminated
+srun: error: nid001675: tasks 1024-1151: Terminated
+srun: error: nid002182: tasks 1920-2047: Terminated
+srun: Force Terminated StepId=6554910.0
