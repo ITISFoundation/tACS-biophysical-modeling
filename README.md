@@ -41,17 +41,26 @@ The `source_file` column of `data.csv` gives the path of each simulation's confi
 
 ## Installation
 
-`requirements.txt` was generated with `pip freeze` from the authors' conda environment. The analysis packages (numpy, scipy, pandas, matplotlib, bluepysnap, and others) are pinned to exact versions. The remaining entries, mainly Jupyter and its dependencies, have the form `package @ file:///…`. They point to conda build folders on the authors' machine that don't exist anywhere else, so `pip install -r requirements.txt` fails as is.
-
-To install, create and activate a conda environment, then install from `requirements.txt` with the local paths removed:
+You need Python 3.11 or newer. Create and activate an environment, then install the requirements:
 
 ```bash
-conda create -n tacs "python>=3.11"
+conda create -n tacs python=3.12
 conda activate tacs
-pip install -r <(sed -E 's/ @ file:.*$//' requirements.txt)
+pip install -r requirements.txt
 ```
 
-The `sed` command strips the `@ file:///…` part of each local entry. The pinned packages are installed at their exact versions, and the others at the newest versions compatible with them. The `<(…)` syntax works in bash and zsh. The pinned numpy and contourpy versions require Python 3.11 or newer.
+A plain virtual environment works too (`python3 -m venv .venv && source .venv/bin/activate`).
+
+`requirements.txt` lists only the packages the code imports directly. The analysis packages (numpy, scipy, pandas, matplotlib, h5py, scikit-learn, bluepysnap, and libsonata, which reads the spike files) are pinned to the versions used for the paper. JupyterLab and ipykernel, needed only to run the notebooks, aren't pinned. pip resolves everything else.
+
+Notes:
+
+- pip warns that numpy 2.4.0 has been yanked from PyPI. The warning is expected: 2.4.0 is the version the paper's results were computed with, and it still installs.
+- On some platforms, pip has no prebuilt package for `brain-indexer` (a dependency of bluepysnap) and builds it from source, which can take several minutes.
+- The import window of `upload/run.py` uses Tkinter. It is included with conda and the python.org installers. If `python -c "import tkinter"` fails, install Tkinter for your Python (for example `brew install python-tk` or `apt install python3-tk`), or use the command-line import described in [Adding a new simulation](#adding-a-new-simulation-to-datacsv).
+- `src.utils.synaptic_delay_tables` also needs [`conntility`](https://github.com/BlueBrain/ConnectomeUtilities). It isn't on PyPI and none of the paper's figures use it, so it isn't in `requirements.txt`. Install it from its repository if you need it.
+
+To check the installation, run the tests (see [Running the tests](#running-the-tests)).
 
 ## Pointing the simulations at your circuit
 
@@ -202,17 +211,6 @@ This repo alone isn't enough to rerun the simulations. You also need:
 
 Then run each simulation's `sim_with_stim.json` as described in the [Neurodamus README](https://github.com/openbraininstitute/neurodamus).
 
-`run_sim.sh` runs several simulations one after another:
-
-1. Edit the `FOLDERS` list at the top of the script. Each folder must contain a `sim_with_stim.json`.
-2. Set `NEURODAMUS_PYTHON` to the Neurodamus directory that contains `init.py`.
-3. Run the script from the directory that contains the compiled `x86_64/special`, or set `WORKDIR` to that directory:
-
-   ```bash
-   NEURODAMUS_PYTHON=/path/to/neurodamus/python bash run_sim.sh
-   ```
-
-Optional environment variables: `NP` (number of MPI ranks, default 120), `MPI_EXTRA_ARGS` (extra `mpirun` flags), `STOP_ON_ERROR=1` (stop at the first failed run), and `LOG_DIR` (default `$WORKDIR/sim_logs`).
 
 ## Running the tests
 
