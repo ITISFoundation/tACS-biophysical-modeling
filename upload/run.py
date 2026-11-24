@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """
-Import stimulation parameters from a Neurodamus simulation config.
+Import a Neurodamus simulation into the simulation table (data.csv).
 
-Running this file normally opens a small GUI where you can choose a
-`sim_with_stim.json` file. The selected config is parsed and the
-`inputs.ex_efields` block is appended as a row in a local CSV file.
+Running this file without arguments opens a small GUI where you can choose a
+`sim_with_stim.json` file. The selected config is parsed, features are
+calculated from its spikes over the chosen analysis window, and the result is
+appended as a row in a CSV file (data.csv by default).
 
-For headless use and testing:
-    python upload.py --import ../tACS/sim10Hz1Vm_disconnect/sim_with_stim.json
+For headless use and testing, from the repository root:
+    python upload/run.py --import data/sim10Hz1Vm_disconnect/sim_with_stim.json
 """
 
 from __future__ import annotations

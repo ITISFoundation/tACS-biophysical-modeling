@@ -2,17 +2,17 @@
 # Run neurodamus simulations one after another, one per config folder.
 #
 # Usage:
-#   ./run_simulations.sh
+#   bash run_sim.sh
 #
 # Optional environment overrides:
-#   NP=64 ./run_simulations.sh                          # change number of MPI ranks
-#   MPI_EXTRA_ARGS="--allow-run-as-root" ./run_simulations.sh   # extra mpirun flags
-#   STOP_ON_ERROR=1 ./run_simulations.sh                # stop at the first failed run
+#   NP=64 bash run_sim.sh                                # change number of MPI ranks
+#   MPI_EXTRA_ARGS="--allow-run-as-root" bash run_sim.sh # extra mpirun flags
+#   STOP_ON_ERROR=1 bash run_sim.sh                      # stop at the first failed run
 
 set -u
 
 # ---------------------------------------------------------------------------
-# EDIT THIS: the folders to run, in order. Each must contain simulation_config.json
+# EDIT THIS: the folders to run, in order. Each must contain sim_with_stim.json
 # ---------------------------------------------------------------------------
 FOLDERS=(
     "/sim15Hz0.5Vm_seed2"
