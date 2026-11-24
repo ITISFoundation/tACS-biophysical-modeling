@@ -1,14 +1,13 @@
 # Mechanistic insights into state-dependent synchronization of neural activity by weak tACS fields
 
-This repo contains the data and code required to replicate the figures in the paper **Mechanistic insights into state-dependent synchronization of neural activity by weak tACS fields** by Habek, Tharayil, et al.
+This repo contains the data and code required to replicate the figures in the paper [Mechanistic insights into state-dependent synchronization of neural activity by weak tACS fields](https://www.biorxiv.org/content/10.64898/2026.11.20.768020) by Habek, Tharayil, et al.
 
 ## Overview
 
-This project provides tools to upload, process, and analyze simulation results. After a simulation is imported, several electrophysiological features are automatically calculated and added to the database.
+This repo provides tools to upload, process, and analyze results of *in silico* simulations of tACS in biophysically-detailed neural circuits. Simulations are configured with `json` files using the [SONATA format](https://github.com/openbraininstitute/sonata-extension) and are run with [Neurodamus](https://github.com/openbraininstitute/neurodamus). The `json` files for each simulation reported in the paper are available in the `data/` folder of this repo, but this repo alone is insufficient to rerun the simulations reported in the paper. In order to rerun the simulations, follow the instructions in the [here](https://github.com/openbraininstitute/neurodamus) to install Neurodamus. Then, follow the instructions in the [Neurodamus ReadME](https://github.com/openbraininstitute/neurodamus) to run each of the simulations specified by the `simulation_config.json` files in this repo.
 
-The calculated features include phase-locking metrics, firing-rate changes, Fourier-based stimulation-frequency measures, and total power estimates.
+As running the simulations is computationally expensive, simulation output files are also available in the `data/` folder. Following the instructions below, this repo allows you to import the simulation outputs into the provided `data.csv` file. After a simulation is imported, several electrophysiological features are automatically calculated and added to the database (Note that for the simulations used in the paper, these features are already present in the `data.csv` file, so there is no need to re-import them). The calculated features include phase-locking metrics, firing-rate changes, Fourier-based stimulation-frequency measures, and total power estimates.
 
-This repo alone is insufficient to rerun the simulations reported in the paper. In order to rerun the simulations, follow the instructions in the [here](https://github.com/openbraininstitute/neurodamus) to install Neurodamus. Then, follow the instructions in the [Neurodamus ReadME](https://github.com/openbraininstitute/neurodamus) to run each of the simulations specified by the `simulation_config.json` files in this repo.
 
 ## Instructions
 
@@ -18,10 +17,10 @@ Activate the environment.
 
 ### Pointing the Simulations at Your Circuit
 
-Every simulation configuration in `data/` stores the path to the circuit it was
-run against, so those paths refer to someone else's machine. Before loading
-simulation results in the analysis notebook or re-running any simulation,
-retarget them all at your own copy of the circuit:
+Every simulation config file in `data/` stores the path to the configuration file of the circuit on which the simulation was
+run (see the [SONATA](https://github.com/openbraininstitute/sonata-extension) documentation for details). In the simulation config files provided in this repo, those paths refer to someone else's machine. Before loading
+simulation results in the analysis notebook or re-running any simulation, download your own copy of the circuit from [Zenodo](https://doi.org/10.5281/zenodo.7930276), then
+retarget all of the simulation config files to your own copy of the circuit:
 
 ```bash
 python -m src.set_network_path /path/to/O1_data/circuit_config.json
@@ -33,8 +32,7 @@ refuses to change anything unless the circuit configuration you name actually
 exists, and it is safe to re-run. An absolute path is recommended: a relative one
 is resolved from each simulation folder, not from where you launched the command.
 
-For this WSL setup, `C:\Users\habek\Downloads\O1_data` is available through
-`~/Downloads/O1_data`. Include `simulation_config.json` to retarget the alternate
+Include `simulation_config.json` to retarget the alternate
 long-run configuration as well:
 
 ```bash
@@ -42,14 +40,14 @@ python -m src.set_network_path "$HOME/Downloads/O1_data/circuit_config.json" \
   --filenames sim_with_stim.json sim_with_stim_new.json simulation_config.json
 ```
 
-The notebook's `node_sets_path` is a separate setting; changing it alone does
+Note: The notebook's `node_sets_path` (see below) is a separate setting; changing it alone does
 not update the circuit paths stored in the simulation configurations. After
 retargeting, restart the notebook kernel and run Setup again to clear cached
 simulation objects.
 
 ### Uploading a New Simulation
 
-To upload the simulation configuration from a new simulation, run the following command in your terminal:
+To upload the simulation configuration of a new simulation, run the following command in your terminal:
 
 ```bash
 python3 run.py
@@ -66,9 +64,6 @@ At the end of the upload process, you will be asked to provide:
 Use a unique simulation name so that the simulation can be found easily, especially if there are multiple simulations with the same signature.
 
 Before uploading there will be a check if there already is a simulation with the written id_name, if there is, It will ask you to choose another name, or if you want to replace this row with this new row.
-
-Cool example of use:
-Maybe you want the same simulation but features from different time frames, just import a simulation 2 times with different id names and defined time frame of feature extraction...
 
 ### Automatically Calculated Features
 
@@ -196,9 +191,15 @@ Make sure that each simulation folder contains:
 
 The path to each `simulation_config.json` file should match the paths listed in the `source_file` column of the `data.csv` database.
 
-### References
+#### References
 
 <a id="ref-1"></a>
 1. Tran, H., Shirinpour, S., & Opitz, A. (2022). Effects of transcranial alternating current stimulation on spiking activity in computational models of single neocortical neurons. *NeuroImage, 250*, 118953. https://doi.org/10.1016/j.neuroimage.2022.118953
 <a id="ref-2"></a>
 2. Parasuram, H., Nanda, S., Dura-Bernal, S., Rahimian, A., Kozloski, J., & Lytton, W. W. (2016). Computational modeling of single neuron extracellular electric potentials and network local field potentials using LFPsim. *Frontiers in Computational Neuroscience, 10*, 65. https://doi.org/10.3389/fncom.2016.00065
+
+## Citation
+
+If you use this code, please cite the following paper: 
+
+Habek, E., Tharayil, J., et al. (2026). Mechanistic insights into state-dependent synchronization of neural activity by weak tACS fields. *bioRxiv 2026.11.20.768020*; https://doi.org/10.64898/2026.11.20.768020
